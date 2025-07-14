@@ -146,9 +146,9 @@ $categories = getCategorie();
                             <div class="card-body">
                                 <h5 class="card-title"><?= htmlspecialchars($obj['nom_objet']) ?></h5>
                                 <?php $emp = getEmprunt($obj['id_objet']); ?>
-                                <?php if ($emp['date_retour'] == null) { ?>
+                                <?php if ($emp != null) { ?>
                                     <p class="card-text text-danger">
-                                        <i class="bi bi-x-circle me-1"></i> Emprunté
+                                        <i class="bi bi-x-circle me-1"></i> Emprunté jusqu'au <?= $emp['date_retour'] ?>
                                     </p>
                                 <?php } else { ?>
                                     <p class="card-text text-success">
