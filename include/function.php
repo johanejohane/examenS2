@@ -52,7 +52,7 @@ function getUser($email) {
 function getCategorie()
 {
     $bdd = connexion();
-    $query = "SELECT * FROM final_categorie_objet";
+    $query = "SELECT * FROM final_categorie_objet ORDER BY nom_categorie"; ;
     $result = mysqli_query($bdd,$query);
     return $result;
 }
@@ -62,7 +62,7 @@ function getListObjet($id) {
     $bdd = connexion();
     $query = "SELECT * FROM final_objet 
                 JOIN final_images_objet on final_objet.id_objet = final_images_objet.id_objet 
-                WHERE id_categorie = $id";
+                WHERE id_categorie = $id ORDER BY nom_objet"; ;
     $result = mysqli_query($bdd, $query);
     return  $result ;
 }

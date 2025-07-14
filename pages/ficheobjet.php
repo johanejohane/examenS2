@@ -54,7 +54,7 @@ $historique = getHistoriqueEmprunts($id_objet);
         </tbody>
     </table>
 
-    <a href="liste_objets.php" class="btn btn-outline-info">← Retour à la liste</a>
+    <a href="accueil.php" class="btn btn-outline-info">← Retour à la liste</a>
 </div>
 
 </body>

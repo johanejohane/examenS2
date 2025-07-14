@@ -110,6 +110,28 @@ $cats = getCategorie();
             color: #818cf8;
             text-decoration: underline;
         }
+
+        .form-label {
+            margin-top: 10px;
+            color: #e5e7eb;
+        }
+
+        .form-control,
+        .form-select {
+            background-color: #1f2937;
+            color: #e5e7eb;
+            border: 1px solid #374151;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            box-shadow: 0 0 0 0.25rem rgba(96, 165, 250, 0.25);
+            border-color: #60a5fa;
+        }
+
+        .form-check-label {
+            margin-left: 0.25rem;
+        }
     </style>
 </head>
 
@@ -119,10 +141,10 @@ $cats = getCategorie();
         <div class="container-fluid">
             <a class="navbar-brand" href="#"><i class="bi bi-box2-heart"></i>Objets Partagés</a>
             <div class="ms-auto">
-                <a href="../traitement/deconnexion.php" class="btn btn-sm btn-outline-primary">
+                <a href="../traitement/deconnexion.php" class="btn btn-sm btn-outline-primary me-2">
                     <i class="bi bi-box-arrow-right me-1"></i>Déconnexion
                 </a>
-                <a href="ajoutobjet.php" class="btn btn-sm btn-outline-primary">
+                <a href="ajoutobjet.php" class="btn btn-sm btn-outline-primary me-2">
                     Ajouter un objet
                 </a>
                 <a href="ajoutimage.php" class="btn btn-sm btn-outline-primary">
@@ -135,28 +157,29 @@ $cats = getCategorie();
     <div class="container mt-5">
         <div class="text-center mb-5">
             <h1 class="fw-bold"><i class="bi bi-person-circle me-2"></i>Bonjour <?= htmlspecialchars($user['nom']) ?></h1>
-            <form action="#" method="post">
+
+            <form action="#" method="post" class="text-start mx-auto" style="max-width: 600px;">
                 <h2>Rechercher un objet :</h2>
-                
-                <label for="categorie">Choisissez la catégorie :</label>
-                <select name="categorie">
+
+                <label for="categorie" class="form-label">Choisissez la catégorie :</label>
+                <select name="categorie" class="form-select mb-3">
                     <?php while ($cat = mysqli_fetch_assoc($cats)) { ?>
                         <option value="<?= $cat['id_categorie'] ?>"><?= $cat['nom_categorie'] ?></option>
                     <?php } ?>
                 </select>
-                <br><br>
 
-                <label for="nom_objet">Trouvez un objet :</label>
-                <input type="text" name="nom_objet" placeholder="Entrez un nom d'objet">
-                <br><br>
+                <label for="nom_objet" class="form-label">Trouvez un objet :</label>
+                <input type="text" name="nom_objet" placeholder="Entrez un nom d'objet" class="form-control mb-3">
 
-                <input type="checkbox" name="dispo">
-                <label for="dispo">Disponible</label>
-                <br><br>
+                <div class="form-check mb-3">
+                    <input type="checkbox" name="dispo" class="form-check-input" id="dispo">
+                    <label for="dispo" class="form-check-label">Disponible</label>
+                </div>
 
-                <input type="submit" value="Chercher">
+                <input type="submit" value="Chercher" class="btn btn-primary">
             </form>
-            <h2 class="text-secondary">Liste des objets</h2>
+
+            <h2 class="text-secondary mt-5">Liste des objets</h2>
         </div>
 
         <?php while ($categ = mysqli_fetch_assoc($categories)) { ?>
@@ -172,7 +195,9 @@ $cats = getCategorie();
                         <div class="card h-100">
                             <img src="../asset/images/<?= htmlspecialchars($obj['nom_image']) ?>" class="card-img-top rounded-top" alt="Image de <?= htmlspecialchars($obj['nom_objet']) ?>">
                             <div class="card-body">
-                                <h5 class="card-title"> <a href="ficheobjet.php?=<?php htmlspecialchars($obj['nom_objet']) ?>"><?= htmlspecialchars($obj['nom_objet']) ?></a></h5>
+                                <h5 class="card-title">
+                                    <a href="ficheobjet.php?id=<?= htmlspecialchars($obj['id_objet']) ?>" class="text-decoration-none text-light"><?= htmlspecialchars($obj['nom_objet']) ?></a>
+                                </h5>
                                 <?php $emp = getEmprunt($obj['id_objet']); ?>
                                 <?php if ($emp != null) { ?>
                                     <p class="card-text text-danger">
@@ -190,7 +215,6 @@ $cats = getCategorie();
             </div>
         <?php } ?>
     </div>
-   
 
 </body>
 
