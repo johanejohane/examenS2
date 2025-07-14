@@ -111,3 +111,5 @@ INSERT INTO final_emprunt (id_objet, id_membre, date_emprunt, date_retour) VALUE
 (8, 2, '2025-07-20', '2025-07-30'),
 (9, 4, '2025-07-22', '2025-08-03'),
 (10, 1, '2025-07-25', '2025-08-05');
+
+SELECT * FROM final_objet;

@@ -10,7 +10,7 @@ include "connexion.php";
 function verifierMail($email) {
     $bdd = connexion();
     $query = "SELECT * FROM final_membre WHERE email = '$email'";
-    $result = mysqli_query($conn, $query);
+    $result = mysqli_query($bdd, $query);
     if (mysqli_num_rows($result) > 0) {
         return true; // L'email est déjà utilisé
     } else {
@@ -67,6 +67,13 @@ function getListObjet($id) {
     return  $result ;
 }
 
+function getAllObjets() {
+    $bdd = connexion();
+    $query = "SELECT * FROM final_objet";
+    $result = mysqli_query($bdd, $query);
+    return $result;
+}
+
 function getEmprunt($id_objet) {
     $bdd = connexion();
     $query = "SELECT * FROM final_emprunt 
@@ -76,7 +83,25 @@ function getEmprunt($id_objet) {
     return mysqli_fetch_assoc(mysqli_query($bdd, $query));
 }
 
+function newImageObjet($id_objet, $nom_image) {
+    $bdd = connexion();
+    $query = "INSERT INTO final_images_objet (id_objet, nom_image) VALUES ($id_objet, '$nom_image')";
+    $result = mysqli_query($bdd, $query);
+}
 
+function newObjet($id_categorie, $nom_objet, $id_membre) {
+    $bdd = connexion();
+    $query = "INSERT INTO final_objet (id_categorie, nom_objet, id_membre) 
+                VALUES ($id_categorie, '$nom_objet', $id_membre)";
+    $result = mysqli_query($bdd, $query);
+}
+
+function getDernierObjet() {
+    $bdd = connexion();
+    $query = "SELECT * FROM final_objet ORDER BY id_objet DESC LIMIT 1";
+    $result = mysqli_query($bdd, $query);
+    return mysqli_fetch_assoc($result);
+}
 
 
 

@@ -3,6 +3,7 @@ include "../include/function.php";
 session_start();
 $user = $_SESSION['user'];
 $categories = getCategorie();
+$cats = getCategorie();
 ?>
 
 <!DOCTYPE html>
@@ -121,6 +122,12 @@ $categories = getCategorie();
                 <a href="../traitement/deconnexion.php" class="btn btn-sm btn-outline-primary">
                     <i class="bi bi-box-arrow-right me-1"></i>Déconnexion
                 </a>
+                <a href="ajoutobjet.php" class="btn btn-sm btn-outline-primary">
+                    Ajouter un objet
+                </a>
+                <a href="ajoutimage.php" class="btn btn-sm btn-outline-primary">
+                    Ajouter une image
+                </a>
             </div>
         </div>
     </nav>
@@ -128,7 +135,28 @@ $categories = getCategorie();
     <div class="container mt-5">
         <div class="text-center mb-5">
             <h1 class="fw-bold"><i class="bi bi-person-circle me-2"></i>Bonjour <?= htmlspecialchars($user['nom']) ?></h1>
-            <h2 class="text-secondary">Liste des objets disponibles</h2>
+            <form action="#" method="post">
+                <h2>Rechercher un objet :</h2>
+                
+                <label for="categorie">Choisissez la catégorie :</label>
+                <select name="categorie">
+                    <?php while ($cat = mysqli_fetch_assoc($cats)) { ?>
+                        <option value="<?= $cat['id_categorie'] ?>"><?= $cat['nom_categorie'] ?></option>
+                    <?php } ?>
+                </select>
+                <br><br>
+
+                <label for="nom_objet">Trouvez un objet :</label>
+                <input type="text" name="nom_objet" placeholder="Entrez un nom d'objet">
+                <br><br>
+
+                <input type="checkbox" name="dispo">
+                <label for="dispo">Disponible</label>
+                <br><br>
+
+                <input type="submit" value="Chercher">
+            </form>
+            <h2 class="text-secondary">Liste des objets</h2>
         </div>
 
         <?php while ($categ = mysqli_fetch_assoc($categories)) { ?>
