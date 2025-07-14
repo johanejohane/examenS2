@@ -172,7 +172,7 @@ $cats = getCategorie();
                         <div class="card h-100">
                             <img src="../asset/images/<?= htmlspecialchars($obj['nom_image']) ?>" class="card-img-top rounded-top" alt="Image de <?= htmlspecialchars($obj['nom_objet']) ?>">
                             <div class="card-body">
-                                <h5 class="card-title"><?= htmlspecialchars($obj['nom_objet']) ?></h5>
+                                <h5 class="card-title"> <a href="ficheobjet.php?=<?php htmlspecialchars($obj['nom_objet']) ?>"><?= htmlspecialchars($obj['nom_objet']) ?></a></h5>
                                 <?php $emp = getEmprunt($obj['id_objet']); ?>
                                 <?php if ($emp != null) { ?>
                                     <p class="card-text text-danger">
@@ -190,6 +190,7 @@ $cats = getCategorie();
             </div>
         <?php } ?>
     </div>
+   
 
 </body>
 
